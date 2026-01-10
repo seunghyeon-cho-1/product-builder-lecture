@@ -54,10 +54,8 @@ h1 {
 
 /* Theme Toggle Button */
 #theme-toggle {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    padding: 8px 12px;
+    /* Position handled by layout */
+    padding: 6px 12px;
     border-radius: 20px;
     border: 1px solid var(--border-color);
     background: var(--secondary-bg);
@@ -65,10 +63,46 @@ h1 {
     font-size: 0.85em;
     color: var(--text-color);
     transition: background 0.2s;
+    margin-left: auto; /* Push to right if in flex container */
 }
 
 #theme-toggle:hover {
     background-color: var(--border-color);
+}
+
+/* Navigation */
+nav {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+}
+
+nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+nav a:hover {
+    color: var(--primary-color);
+}
+
+/* Tool Sections */
+.tool-section {
+    margin-bottom: 20px;
+}
+
+.tool-section h2 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.tool-section p {
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: var(--text-color);
+    opacity: 0.9;
 }
 
 /* Buttons */
