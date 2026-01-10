@@ -1,4 +1,3 @@
-
 class LottoBall extends HTMLElement {
   constructor() {
     super();
@@ -63,3 +62,135 @@ generatorBtn.addEventListener('click', () => {
     lottoNumbersContainer.appendChild(ball);
   });
 });
+
+// Dinner Menu Recommendation
+const menuBtn = document.getElementById('menu-btn');
+const menuResult = document.getElementById('menu-result');
+
+const menus = [
+    "Pizza", "Burger", "Sushi", "Pasta", "Salad", "Steak", 
+    "Tacos", "Fried Chicken", "Ramen", "Curry", "Sandwich", "Bibimbap"
+];
+
+if (menuBtn && menuResult) {
+    menuBtn.addEventListener('click', () => {
+        const randomIndex = Math.floor(Math.random() * menus.length);
+        menuResult.textContent = `How about ${menus[randomIndex]}?`;
+        menuResult.style.animation = 'none';
+        menuResult.offsetHeight; /* trigger reflow */
+        menuResult.style.animation = 'fadeIn 0.5s ease-in-out';
+    });
+}
+
+
+// Rock Paper Scissors - Teachable Machine
+const URL = "https://teachablemachine.withgoogle.com/models/ZPK8R1W2J/";
+
+let model, webcam, labelContainer, maxPredictions;
+
+async function loadModel() {
+    if (!model) {
+        const modelURL = URL + "model.json";
+        const metadataURL = URL + "metadata.json";
+        model = await tmImage.load(modelURL, metadataURL);
+        maxPredictions = model.getTotalClasses();
+    }
+}
+
+async function initWebcam() {
+    await loadModel();
+
+    // Convenience function to setup a webcam
+    const flip = true; // whether to flip the webcam
+    webcam = new tmImage.Webcam(200, 200, flip); // width, height, flip
+    await webcam.setup(); // request access to the webcam
+    await webcam.play();
+    window.requestAnimationFrame(loop);
+
+    // append elements to the DOM
+    document.getElementById("webcam-container").appendChild(webcam.canvas);
+    setupLabelContainer();
+}
+
+function setupLabelContainer() {
+    labelContainer = document.getElementById("label-container");
+    labelContainer.innerHTML = ""; // Clear existing labels
+    for (let i = 0; i < maxPredictions; i++) { // and class labels
+        labelContainer.appendChild(document.createElement("div"));
+    }
+}
+
+async function loop() {
+    webcam.update(); // update the webcam frame
+    await predict(webcam.canvas);
+    window.requestAnimationFrame(loop);
+}
+
+// run the image through the image model
+async function predict(imageSource) {
+    // predict can take in an image, video or canvas html element
+    const prediction = await model.predict(imageSource);
+    for (let i = 0; i < maxPredictions; i++) {
+        const classPrediction =
+            prediction[i].className + ": " + (prediction[i].probability * 100).toFixed(0) + "%";
+        labelContainer.childNodes[i].innerHTML = classPrediction;
+    }
+}
+
+const rpsStartBtn = document.getElementById('rps-start-btn');
+if (rpsStartBtn) {
+    rpsStartBtn.addEventListener('click', () => {
+        rpsStartBtn.disabled = true;
+        rpsStartBtn.textContent = "Loading...";
+        initWebcam().then(() => {
+             rpsStartBtn.style.display = 'none';
+             document.getElementById('rps-upload-btn').style.display = 'none';
+             if (document.querySelector('.rps-controls span')) {
+                 document.querySelector('.rps-controls span').style.display = 'none';
+             }
+        }).catch(err => {
+            console.error(err);
+            rpsStartBtn.disabled = false;
+            rpsStartBtn.textContent = "Start Camera";
+            alert("Failed to access camera or load model.");
+        });
+    });
+}
+
+// File Upload Logic
+const rpsUploadBtn = document.getElementById('rps-upload-btn');
+const rpsFileInput = document.getElementById('rps-file-input');
+const rpsPreviewImg = document.getElementById('rps-preview-img');
+const imagePreviewContainer = document.getElementById('image-preview-container');
+
+if (rpsUploadBtn && rpsFileInput) {
+    rpsUploadBtn.addEventListener('click', () => {
+        rpsFileInput.click();
+    });
+
+    rpsFileInput.addEventListener('change', async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = async (event) => {
+            rpsPreviewImg.src = event.target.result;
+            imagePreviewContainer.style.display = 'block';
+            
+            // If webcam is running, we might want to stop it, but for now let's just predict
+            if (webcam) {
+                // Not strictly necessary to stop webcam if we just want to show the file result
+            }
+
+            await loadModel();
+            setupLabelContainer();
+            
+            // Wait for image to load to get dimensions correctly if needed, 
+            // though tmImage handles image elements well.
+            rpsPreviewImg.onload = async () => {
+                await predict(rpsPreviewImg);
+            };
+        };
+        reader.readAsDataURL(file);
+    });
+}
