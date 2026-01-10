@@ -6,10 +6,31 @@ body {
     min-height: 100vh;
     background-color: #f0f0f0;
     margin: 0;
+    color: #333;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
 }
 
 .container {
     text-align: center;
+    position: relative;
+}
+
+#theme-toggle {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    background: transparent;
+    cursor: pointer;
+    font-size: 0.9em;
+    color: inherit;
 }
 
 #generator-btn {
