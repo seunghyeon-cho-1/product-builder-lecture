@@ -53,11 +53,48 @@
       "name": "Daily Utility Tools",
       "url": "https://seunghyeon-cho-1.github.io/product-builder-lecture/",
       "description": "Simple web applications for daily decisions.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Daily Utility Tools",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://seunghyeon-cho-1.github.io/product-builder-lecture/favicon.svg"
+        }
+      },
       "potentialAction": {
         "@type": "SearchAction",
         "target": "https://seunghyeon-cho-1.github.io/product-builder-lecture/?q={search_term_string}",
         "query-input": "required name=search_term_string"
-      }
+      },
+      "mainEntity": [{
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is the Lotto Number Generator?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The Lotto Number Generator is a tool that provides a random, unbiased selection of lottery numbers for your next ticket."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does the Dinner Menu Recommender work?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The Dinner Menu Recommender randomly chooses a dinner menu for you from a predefined list of various food items, helping you to decide what to eat."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What can the Rock Paper Scissors (AI Powered) tool do?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This tool uses a machine learning model to recognize and classify hand gestures of Rock, Paper, or Scissors from your webcam or an uploaded image."
+            }
+          }
+        ]
+      }]
     }
     </script>
 
@@ -76,69 +113,75 @@
             </div>
         </nav>
         
-        <header style="text-align: center; margin-bottom: 40px;">
-            <h1 style="margin-top: 0;">Welcome to Daily Utility Tools</h1>
-            <p>Your go-to simple web applications for making daily decisions easier and more fun. Explore our suite of tools designed to add a spark of convenience to your routine.</p>
-        </header>
+        <main>
+            <header style="text-align: center; margin-bottom: 40px;">
+                <h1 style="margin-top: 0;">Welcome to Daily Utility Tools</h1>
+                <p>Your go-to simple web applications for making daily decisions easier and more fun. Explore our suite of tools designed to add a spark of convenience to your routine.</p>
+            </header>
 
-        <section class="tool-section">
-            <h2>Lotto Number Generator</h2>
-            <p>Feeling lucky today? Use our random number generator to create a set of lottery numbers. While we can't guarantee a win, we can guarantee a random and unbiased selection for your next ticket.</p>
-            <button id="generator-btn">Generate Numbers</button>
-            <div id="lotto-numbers-container"></div>
-        </section>
+            <section class="tldr-section" style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; margin-bottom: 40px;">
+                <h2>TL;DR: What We Offer</h2>
+                <p>This page provides three simple tools for daily use: a <strong>Lotto Number Generator</strong> for random number picks, a <strong>Dinner Menu Recommender</strong> to help you decide what to eat, and an <strong>AI-powered Rock Paper Scissors</strong> game that recognizes your hand gestures.</p>
+            </section>
 
-        <hr style="margin: 40px 0; border: none; border-top: 1px solid #ccc;">
+            <article class="tool-section">
+                <h2>How Can I Generate Lotto Numbers?</h2>
+                <p>Feeling lucky today? Use our random number generator to create a set of lottery numbers. While we can't guarantee a win, we can guarantee a random and unbiased selection for your next ticket. Our algorithm is based on the robust <a href="https://en.wikipedia.org/wiki/Mersenne_Twister" target="_blank" rel="noopener noreferrer">Mersenne Twister</a> pseudorandom number generator for statistically sound randomness.</p>
+                <button id="generator-btn">Generate Numbers</button>
+                <div id="lotto-numbers-container"></div>
+            </article>
 
-        <section class="tool-section">
-            <h2>Dinner Menu Recommender</h2>
-            <p>Stuck in a food rut? Can't decide what to eat? Let our Dinner Menu Recommender choose for you. From Sushi to Steak, let chance decide your next culinary adventure.</p>
-            <button id="menu-btn">Recommend Menu</button>
-            <div id="menu-result"></div>
-        </section>
+            <hr style="margin: 40px 0; border: none; border-top: 1px solid #ccc;">
 
-        <hr style="margin: 40px 0; border: none; border-top: 1px solid #ccc;">
+            <article class="tool-section">
+                <h2>What Should I Have for Dinner?</h2>
+                <p>Stuck in a food rut? Can't decide what to eat? Let our Dinner Menu Recommender choose for you. From Sushi to Steak, let chance decide your next culinary adventure.</p>
+                <button id="menu-btn">Recommend Menu</button>
+                <div id="menu-result"></div>
+            </article>
 
-        <section class="tool-section">
-            <h2>Rock Paper Scissors (AI Powered)</h2>
-            <p>Test your skills against our AI model or simply classify your hand gestures. This tool uses machine learning to recognize Rock, Paper, or Scissors gestures via your webcam or uploaded images.</p>
-            <div class="rps-controls">
-                <button id="rps-start-btn">Start Camera</button>
-                <span>OR</span>
-                <input type="file" id="rps-file-input" accept="image/*" style="display: none;">
-                <button id="rps-upload-btn">Upload Image</button>
-            </div>
-            <div id="webcam-container"></div>
-            <div id="image-preview-container" style="display: none; margin-top: 20px;">
-                <img id="rps-preview-img" src="" alt="Preview" style="max-width: 200px; border-radius: 8px;">
-            </div>
-            <div id="label-container"></div>
-        </section>
+            <hr style="margin: 40px 0; border: none; border-top: 1px solid #ccc;">
 
-        <hr style="margin: 40px 0; border: none; border-top: 1px solid #ccc;">
-
-        <section class="contact-section">
-            <h2>Partnership Inquiry</h2>
-            <p>Have an idea for a new tool? Want to collaborate? Fill out the form below to get in touch with our development team.</p>
-            <form action="https://formspree.io/f/xreezapq" method="POST" id="contact-form">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" placeholder="Your Name" required>
+            <article class="tool-section">
+                <h2>How Can I Play Rock Paper Scissors with AI?</h2>
+                <p>Test your skills against our AI model or simply classify your hand gestures. This tool uses machine learning to recognize Rock, Paper, or Scissors gestures via your webcam or uploaded images.</p>
+                <div class="rps-controls">
+                    <button id="rps-start-btn">Start Camera</button>
+                    <span>OR</span>
+                    <input type="file" id="rps-file-input" accept="image/*" style="display: none;">
+                    <button id="rps-upload-btn">Upload Image</button>
                 </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="Your Email" required>
+                <div id="webcam-container"></div>
+                <div id="image-preview-container" style="display: none; margin-top: 20px;">
+                    <img id="rps-preview-img" src="" alt="Uploaded image for Rock Paper Scissors classification" style="max-width: 200px; border-radius: 8px;">
                 </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" rows="4" placeholder="How can we collaborate?" required></textarea>
-                </div>
-                <button type="submit" id="submit-btn">Send Message</button>
-            </form>
-        </section>
+                <div id="label-container"></div>
+            </article>
+
+            <hr style="margin: 40px 0; border: none; border-top: 1px solid #ccc;">
+
+            <section class="contact-section">
+                <h2>Partnership Inquiry</h2>
+                <p>Have an idea for a new tool? Want to collaborate? Fill out the form below to get in touch with our development team.</p>
+                <form action="https://formspree.io/f/xreezapq" method="POST" id="contact-form">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="4" placeholder="How can we collaborate?" required></textarea>
+                    </div>
+                    <button type="submit" id="submit-btn">Send Message</button>
+                </form>
+            </section>
+        </main>
 
         <hr style="margin: 40px 0; border: none; border-top: 1px solid #ccc;">
-
         <div id="disqus_thread"></div>
         <script>
             /**
@@ -160,6 +203,9 @@
         <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
         
         <footer style="margin-top: 50px; text-align: center; font-size: 0.8em; color: #777;">
+            <div class="author-profile" style="margin-bottom: 20px;">
+                <p>Developed by <a href="https://github.com/seunghyeon-cho-1" target="_blank" rel="noopener noreferrer">Seunghyeon Cho</a>, a software engineer passionate about building useful and fun web applications.</p>
+            </div>
             <p>&copy; 2026 Daily Utility Tools. All rights reserved.</p>
             <p><a href="privacy.html" style="color: inherit;">Privacy Policy</a></p>
         </footer>
