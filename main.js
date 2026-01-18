@@ -194,3 +194,38 @@ if (rpsUploadBtn && rpsFileInput) {
         reader.readAsDataURL(file);
     });
 }
+
+// SNS Share functionality
+const shareTwitterBtn = document.getElementById('share-twitter');
+const shareFacebookBtn = document.getElementById('share-facebook');
+const copyLinkBtn = document.getElementById('copy-link-btn');
+
+const pageUrl = window.location.href;
+const pageTitle = document.title;
+
+if (shareTwitterBtn) {
+    shareTwitterBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const twitterUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(pageTitle)}`;
+        window.open(twitterUrl, '_blank', 'width=600,height=400');
+    });
+}
+
+if (shareFacebookBtn) {
+    shareFacebookBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`;
+        window.open(facebookUrl, '_blank', 'width=600,height=400');
+    });
+}
+
+if (copyLinkBtn) {
+    copyLinkBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(pageUrl).then(() => {
+            alert('Link copied to clipboard!');
+        }).catch(err => {
+            console.error('Failed to copy link: ', err);
+            alert('Failed to copy link. Please copy it manually.');
+        });
+    });
+}
