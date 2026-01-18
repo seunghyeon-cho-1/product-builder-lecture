@@ -41,7 +41,8 @@
     <meta property="twitter:description" content="Free online utility tools: Random Lotto Number Generator, Dinner Menu Recommender, and AI-powered Rock Paper Scissors game. Simplify your daily decisions now.">
     <meta property="twitter:image" content="https://seunghyeon-cho-1.github.io/product-builder-lecture/favicon.svg">
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="style.css"></noscript>
     <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
     
     <!-- Structured Data -->
@@ -165,6 +166,6 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
-    <script src="main.js"></script>
+    <script src="main.js" defer></script>
 </body>
 </html>
